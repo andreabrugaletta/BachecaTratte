@@ -1,21 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { View } from 'react-native'
+import LinesScreen from './screens/LinesScreen'
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const lines = [
+    {
+      terminus1: { sname: 'Milano Celoria', did: 1 },
+      terminus2: { sname: 'Milano Rogoredo', did: 2 },
+    },
+    {
+      terminus1: { sname: 'Milano Lambrate', did: 3 },
+      terminus2: { sname: 'Sesto San Giovanni', did: 4 },
+    },
+  ]
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  return (
+    <View>
+      <LinesScreen lines={lines} />
+    </View>
+  )
+}
