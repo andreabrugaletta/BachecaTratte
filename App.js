@@ -1,22 +1,26 @@
 import React from 'react'
-import { SafeAreaView, View } from 'react-native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import BoardsScreen from './screens/BoardsScreen'
 import LinesScreen from './screens/LinesScreen'
+import { NavigationContainer } from '@react-navigation/native'
 
 export default function App() {
-  const lines = [
-    {
-      terminus1: { sname: 'Milano Celoria', did: 1 },
-      terminus2: { sname: 'Milano Rogoredo', did: 2 },
-    },
-    {
-      terminus1: { sname: 'Milano Lambrate', did: 3 },
-      terminus2: { sname: 'Sesto San Giovanni', did: 4 },
-    },
-  ]
+  const Stack = createNativeStackNavigator()
 
   return (
-    <SafeAreaView>
-      <LinesScreen lines={lines} />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="LinesScreen"
+          component={LinesScreen}
+          options={{ title: '' }}
+        />
+        <Stack.Screen
+          name="BoardsScreen"
+          component={BoardsScreen}
+          options={{ title: '' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }

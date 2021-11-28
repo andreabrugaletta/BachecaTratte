@@ -10,7 +10,7 @@ const Header = (props) => {
 }
 
 const styles = StyleSheet.create({
-  title: { fontSize: 42, paddingTop: 24, paddingLeft: 16, fontWeight: 'bold' },
+  title: { fontSize: 42, paddingTop: 16, paddingLeft: 16, fontWeight: 'bold' },
 })
 
 export default Header
