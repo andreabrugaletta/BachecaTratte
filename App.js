@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { SafeAreaView, View } from 'react-native'
 import LinesScreen from './screens/LinesScreen'
 
 export default function App() {
@@ -15,8 +15,8 @@ export default function App() {
   ]
 
   return (
-    <View>
+    <SafeAreaView>
       <LinesScreen lines={lines} />
-    </View>
+    </SafeAreaView>
   )
 }

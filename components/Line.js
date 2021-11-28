@@ -1,9 +1,9 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
 const Line = (props) => {
   return (
-    <View>
+    <View style={styles.item}>
       <Text>
         {props.terminus1} - {props.terminus2}
       </Text>
@@ -12,5 +12,11 @@ const Line = (props) => {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  item: {
+    paddingLeft: 16,
+  },
+})
 
 export default Line
