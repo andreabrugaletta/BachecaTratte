@@ -25,7 +25,10 @@ const LinesScreen = ({ navigation }) => {
 
   useEffect(() => {
     getLines()
-  })
+    return () => {
+      setLines({})
+    }
+  }, [])
 
   return (
     <View>

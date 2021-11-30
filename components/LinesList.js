@@ -8,7 +8,6 @@ const LinesList = (props) => {
       data={props.lines}
       renderItem={({ item }) => (
         <Line
-          data={item}
           terminus1={item.terminus1}
           terminus2={item.terminus2}
           navigation={props.navigation}

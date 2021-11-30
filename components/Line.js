@@ -11,7 +11,6 @@ const Line = (props) => {
         onPress={() => {
           console.log(props.terminus1.did)
           props.navigation.navigate('BoardsScreen', {
-            line: props.data,
             terminus: props.terminus1,
           })
         }}
@@ -24,7 +23,6 @@ const Line = (props) => {
         onPress={() => {
           console.log(props.terminus2.did)
           props.navigation.navigate('BoardsScreen', {
-            line: props.data,
             terminus: props.terminus2,
           })
         }}
