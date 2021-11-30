@@ -7,12 +7,28 @@ const Line = (props) => {
       <Text style={styles.lineName}>
         {props.terminus1.sname} - {props.terminus2.sname}
       </Text>
-      <TouchableOpacity onPress={() => console.log(props.terminus1.did)}>
+      <TouchableOpacity
+        onPress={() => {
+          console.log(props.terminus1.did)
+          props.navigation.navigate('BoardsScreen', {
+            line: props.data,
+            terminus: props.terminus1,
+          })
+        }}
+      >
         <Text style={styles.lineDirection}>
           direzione {props.terminus1.sname}
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => console.log(props.terminus2.did)}>
+      <TouchableOpacity
+        onPress={() => {
+          console.log(props.terminus2.did)
+          props.navigation.navigate('BoardsScreen', {
+            line: props.data,
+            terminus: props.terminus2,
+          })
+        }}
+      >
         <Text style={styles.lineDirection}>
           direzione {props.terminus2.sname}
         </Text>
@@ -23,7 +39,7 @@ const Line = (props) => {
 
 const styles = StyleSheet.create({
   item: {
-    paddingLeft: 16,
+    paddingHorizontal: 16,
   },
   lineName: {
     fontWeight: 'bold',
