@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import PostsList from '../components/PostsList'
 import { SidContext } from '../utils/SidContext'
 
