@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { View } from 'react-native'
-import Header from '../components/Header'
 import LinesList from '../components/LinesList'
 import { SidContext } from '../utils/SidContext'
 
@@ -32,7 +31,6 @@ const LinesScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Header text="Tratte" />
       <LinesList lines={lines} navigation={navigation} />
     </View>
   )

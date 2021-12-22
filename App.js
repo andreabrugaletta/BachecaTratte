@@ -16,12 +16,12 @@ export default function App() {
           <Stack.Screen
             name="LinesScreen"
             component={LinesScreen}
-            options={{ title: '' }}
+            options={{ title: 'Maledetta TreEst' }}
           />
           <Stack.Screen
             name="BoardsScreen"
             component={BoardsScreen}
-            options={{ title: '' }}
+            options={{ title: 'Bacheca' }}
           />
         </Stack.Navigator>
       </NavigationContainer>

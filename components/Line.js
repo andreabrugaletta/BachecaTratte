@@ -1,50 +1,43 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 
 const Line = (props) => {
   return (
-    <View style={styles.item}>
-      <Text style={styles.lineName}>
-        {props.terminus1.sname} - {props.terminus2.sname}
-      </Text>
-      <TouchableOpacity
-        onPress={() => {
-          console.log(props.terminus1.did)
-          props.navigation.navigate('BoardsScreen', {
-            terminus: props.terminus1,
-          })
-        }}
-      >
-        <Text style={styles.lineDirection}>
-          direzione {props.terminus1.sname}
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          console.log(props.terminus2.did)
-          props.navigation.navigate('BoardsScreen', {
-            terminus: props.terminus2,
-          })
-        }}
-      >
-        <Text style={styles.lineDirection}>
-          direzione {props.terminus2.sname}
-        </Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity
+      onPress={() => {
+        console.log(props.terminus1.sname)
+        props.navigation.navigate('BoardsScreen', {
+          terminus: props.terminus1,
+        })
+      }}
+    >
+      <View style={styles.item}>
+        <Image style={styles.image} source={require('../assets/nodes.png')} />
+        <View style={styles.textContainer}>
+          <Text style={styles.terminusName}>{props.terminus1.sname}</Text>
+          <Text style={styles.terminusName}>{props.terminus2.sname}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
   )
 }
 
 const styles = StyleSheet.create({
   item: {
     paddingHorizontal: 16,
+    paddingVertical: 24,
+    flexDirection: 'row',
   },
-  lineName: {
-    fontWeight: 'bold',
-    fontSize: 24,
-    paddingVertical: 10,
+  image: {
+    height: 48,
+    width: 48,
+    transform: [{ rotate: '-45deg' }],
+    tintColor: '#474747',
   },
-  lineDirection: { fontSize: 20, paddingVertical: 6 },
+  textContainer: {
+    flexDirection: 'column',
+  },
+  terminusName: { fontSize: 20 },
 })
 
 export default Line
