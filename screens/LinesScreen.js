@@ -1,37 +1,48 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { View } from 'react-native'
 import LinesList from '../components/LinesList'
+import NetworkController from '../utils/NetworkController'
 import { SidContext } from '../utils/SidContext'
 
 const LinesScreen = ({ navigation }) => {
-  const sid = useContext(SidContext)
-  const GET_LINES_URL =
-    'https://ewserver.di.unimi.it/mobicomp/treest/getLines.php'
   const [lines, setLines] = useState({})
+  const [networkController] = useState(() => new NetworkController())
+  const sid = useContext(SidContext)
 
-  const getLines = async () => {
-    try {
-      const response = await fetch(GET_LINES_URL, {
-        method: 'POST',
-        body: JSON.stringify({ sid: sid }),
-      })
-      const json = await response.json()
-      setLines(json.lines)
-    } catch (error) {
-      console.error(error)
-    }
+  const swapLine = (lineIndex) => {
+    console.log('swapLine on index: ' + lineIndex)
+    setLines(
+      lines.map((line, index) => {
+        if (index === lineIndex) {
+          let temp = line.terminus1
+          line.terminus1 = line.terminus2
+          line.terminus2 = temp
+          return line
+        }
+        return line
+      }),
+    )
+  }
+
+  const getLine = (lineIndex) => {
+    return lines[lineIndex]
   }
 
   useEffect(() => {
-    getLines()
-    return () => {
-      setLines({})
-    }
+    console.log('setting lines')
+    networkController.getLines(sid, (lines) => {
+      setLines(lines)
+    })
   }, [])
 
   return (
     <View>
-      <LinesList lines={lines} navigation={navigation} />
+      <LinesList
+        lines={lines}
+        navigation={navigation}
+        swapLine={swapLine}
+        getLine={getLine}
+      />
     </View>
   )
 }

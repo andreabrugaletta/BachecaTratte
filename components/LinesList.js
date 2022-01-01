@@ -7,10 +7,13 @@ const LinesList = (props) => {
   return (
     <FlatList
       data={props.lines}
-      renderItem={({ item }) => (
+      renderItem={({ item, index }) => (
         <Line
           terminus1={item.terminus1}
           terminus2={item.terminus2}
+          swapLine={props.swapLine}
+          getLine={props.getLine}
+          index={index}
           navigation={props.navigation}
         />
       )}

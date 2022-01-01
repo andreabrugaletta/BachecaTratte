@@ -7,7 +7,10 @@ const Line = (props) => {
       onPress={() => {
         console.log(props.terminus1.sname)
         props.navigation.navigate('BoardsScreen', {
-          terminus: props.terminus1,
+          // terminus: props.terminus1,
+          index: props.index,
+          swapLine: props.swapLine,
+          getLine: props.getLine,
         })
       }}
     >
@@ -17,6 +20,12 @@ const Line = (props) => {
           <Text style={styles.terminusName}>{props.terminus1.sname}</Text>
           <Text style={styles.terminusName}>{props.terminus2.sname}</Text>
         </View>
+        <TouchableOpacity onPress={() => props.swapLine(props.index)}>
+          <Image
+            style={styles.imageButton}
+            source={require('../assets/swap.png')}
+          />
+        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   )
@@ -38,6 +47,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   terminusName: { fontSize: 20 },
+  imageButton: {
+    height: 44,
+    width: 44,
+    tintColor: '#474747',
+  },
 })
 
 export default Line
