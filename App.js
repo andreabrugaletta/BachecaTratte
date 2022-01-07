@@ -1,14 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import BoardsScreen from './screens/BoardsScreen'
 import LinesScreen from './screens/LinesScreen'
 import { NavigationContainer } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import NetworkController from './utils/NetworkController'
 import { SidContext } from './utils/SidContext'
+import Profile from './components/Profile'
+
+const Stack = createNativeStackNavigator()
+const Tab = createBottomTabNavigator()
+
+function HomeTab() {
+  return (
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen name="Linee" component={LinesScreen} />
+      <Tab.Screen name="Profilo" component={Profile} />
+    </Tab.Navigator>
+  )
+}
 
 export default function App() {
-  const LineStack = createNativeStackNavigator()
   const [networkController] = useState(() => new NetworkController())
   const [sid, setSid] = useState('')
 
@@ -16,7 +29,7 @@ export default function App() {
     const firstLaunch = await AsyncStorage.getItem('firstLaunch')
     if (firstLaunch === null) {
       console.log('first launch')
-      networkController.register(async (registerSid) => {
+      networkController.register().then(async (registerSid) => {
         setSid(registerSid)
         await AsyncStorage.setItem('sid', registerSid)
       })
@@ -34,14 +47,14 @@ export default function App() {
     return (
       <SidContext.Provider value={sid}>
         <NavigationContainer>
-          <LineStack.Navigator initialRouteName="Lines">
-            <LineStack.Screen
+          <Stack.Navigator initialRouteName="Lines">
+            <Stack.Screen
               name="LinesScreen"
-              component={LinesScreen}
+              component={HomeTab}
               options={{ title: 'Maledetta TreEst' }}
             />
-            <LineStack.Screen name="BoardsScreen" component={BoardsScreen} />
-          </LineStack.Navigator>
+            <Stack.Screen name="BoardsScreen" component={BoardsScreen} />
+          </Stack.Navigator>
         </NavigationContainer>
       </SidContext.Provider>
     )

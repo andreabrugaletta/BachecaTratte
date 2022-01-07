@@ -33,7 +33,7 @@ export default class StorageManager {
     })
   }
 
-  async insertUser(user) {
+  async insertUserAsync(user) {
     const transactionCode = (tx) => {
       let query =
         'INSERT OR REPLACE INTO USER (id, username, picture, pversion) VALUES(?, ?, ?, ?)'
@@ -53,16 +53,16 @@ export default class StorageManager {
     return await this.db.transactionPromise(transactionCode)
   }
 
-  /* not necessary */
-  async getUserWithId(id) {
-    console.log('getting user with id ', id)
+  async isUserInDbAsync(id) {
+    console.log('checking if user is in db... ')
     const db = this.db
     const transactionCode = (tx) => {
       let query = 'SELECT * FROM user WHERE id = ?'
       tx.executeSql(query, [id], (tx, queryResult) => {
-        console.log(queryResult)
         if (queryResult.rows.length > 0) {
-          db.result = queryResult.rows._array[0]
+          db.result = true
+        } else {
+          db.result = false
         }
       }),
         (tx, error) => {
@@ -72,13 +72,12 @@ export default class StorageManager {
     return await this.db.transactionPromise(transactionCode)
   }
 
-  async getUserPicture(id) {
+  async getUserPictureAsync(id) {
     console.log('getting user picture...')
     const db = this.db
     const transactionCode = (tx) => {
       let query = 'SELECT picture FROM user WHERE id = ?'
       tx.executeSql(query, [id], (tx, queryResult) => {
-        console.log(queryResult)
         if (queryResult.rows.length > 0) {
           db.result = queryResult.rows._array[0].picture
         }
@@ -90,13 +89,12 @@ export default class StorageManager {
     return await this.db.transactionPromise(transactionCode)
   }
 
-  async getPictureVersion(id) {
+  async getPictureVersionAsync(id) {
     console.log('getting picture version...')
     const db = this.db
     const transactionCode = (tx) => {
       let query = 'SELECT pversion FROM user WHERE id = ?'
       tx.executeSql(query, [id], (tx, queryResult) => {
-        console.log(queryResult)
         if (queryResult.rows.length > 0) {
           db.result = queryResult.rows._array[0].pversion
         }

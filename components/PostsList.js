@@ -9,7 +9,9 @@ const PostsList = (props) => {
     <FlatList
       data={props.posts}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={({ item }) => <Post data={item} />}
+      renderItem={({ item }) => (
+        <Post data={item} follow={props.follow} unfollow={props.unfollow} />
+      )}
       keyExtractor={(item, index) => item.datetime}
     />
   )

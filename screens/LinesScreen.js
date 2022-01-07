@@ -30,9 +30,7 @@ const LinesScreen = ({ navigation }) => {
 
   useEffect(() => {
     console.log('setting lines')
-    networkController.getLines(sid, (lines) => {
-      setLines(lines)
-    })
+    networkController.getLines(sid).then((lines) => setLines(lines))
   }, [])
 
   return (
