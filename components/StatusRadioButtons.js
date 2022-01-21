@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { RadioButton } from 'react-native-paper'
+import { COLORS } from '../colors'
 
 const StatusRadioButtons = (props) => {
   const [checked, setChecked] = useState('fourth')
@@ -10,6 +11,7 @@ const StatusRadioButtons = (props) => {
       <View style={styles.radioButton}>
         {console.log('render StatusRadioButtons')}
         <RadioButton
+          color={COLORS.green}
           value="first"
           status={checked !== 'first' ? 'unchecked' : 'checked'}
           onPress={() => {
@@ -22,6 +24,7 @@ const StatusRadioButtons = (props) => {
       </View>
       <View style={styles.radioButton}>
         <RadioButton
+          color={COLORS.yellow}
           value="second"
           status={checked !== 'second' ? 'unchecked' : 'checked'}
           onPress={() => {
@@ -34,6 +37,7 @@ const StatusRadioButtons = (props) => {
       </View>
       <View style={styles.radioButton}>
         <RadioButton
+          color={COLORS.red}
           value="third"
           status={checked !== 'third' ? 'unchecked' : 'checked'}
           onPress={() => {
@@ -46,6 +50,7 @@ const StatusRadioButtons = (props) => {
       </View>
       <View style={styles.radioButton}>
         <RadioButton
+          color="grey"
           value="fourth"
           status={checked !== 'fourth' ? 'unchecked' : 'checked'}
           onPress={() => {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Text, StyleSheet, View, Image, Button } from 'react-native'
+import { COLORS } from '../colors'
 
 const Post = (props) => {
   const [picture, setPicture] = useState(props.data.picture)
@@ -9,28 +10,36 @@ const Post = (props) => {
       case 0:
         return (
           <View style={styles.info}>
-            <View style={[styles.symbolShape, { backgroundColor: 'green' }]} />
+            <View
+              style={[styles.symbolShape, { backgroundColor: COLORS.green }]}
+            />
             <Text style={styles.textInfo}>In orario</Text>
           </View>
         )
       case 1:
         return (
           <View style={styles.info}>
-            <View style={[styles.symbolShape, { backgroundColor: 'yellow' }]} />
+            <View
+              style={[styles.symbolShape, { backgroundColor: COLORS.yellow }]}
+            />
             <Text style={styles.textInfo}>In ritardo di pochi minuti</Text>
           </View>
         )
       case 2:
         return (
           <View style={styles.info}>
-            <View style={[styles.symbolShape, { backgroundColor: 'orange' }]} />
+            <View
+              style={[styles.symbolShape, { backgroundColor: COLORS.orange }]}
+            />
             <Text style={styles.textInfo}>Ritardo di oltre 15 minuti</Text>
           </View>
         )
       case 3:
         return (
           <View style={styles.info}>
-            <View style={[styles.symbolShape, { backgroundColor: 'red' }]} />
+            <View
+              style={[styles.symbolShape, { backgroundColor: COLORS.red }]}
+            />
             <Text style={styles.textInfo}>Treni soppressi</Text>
           </View>
         )
@@ -48,21 +57,27 @@ const Post = (props) => {
       case 0:
         return (
           <View style={styles.info}>
-            <View style={[styles.symbolShape, { backgroundColor: 'green' }]} />
+            <View
+              style={[styles.symbolShape, { backgroundColor: COLORS.green }]}
+            />
             <Text style={styles.textInfo}>Situazione ideale</Text>
           </View>
         )
       case 1:
         return (
           <View style={styles.info}>
-            <View style={[styles.symbolShape, { backgroundColor: 'yellow' }]} />
+            <View
+              style={[styles.symbolShape, { backgroundColor: COLORS.yellow }]}
+            />
             <Text style={styles.textInfo}>Situazione accettabile</Text>
           </View>
         )
       case 2:
         return (
           <View style={styles.info}>
-            <View style={[styles.symbolShape, { backgroundColor: 'red' }]} />
+            <View
+              style={[styles.symbolShape, { backgroundColor: COLORS.red }]}
+            />
             <Text style={styles.textInfo}>Gravi disagi per i passeggeri</Text>
           </View>
         )
@@ -86,15 +101,32 @@ const Post = (props) => {
     if (isAuthorFollowed) {
       return (
         <Button
+          color={COLORS.red}
           title="Segui già"
           onPress={() => props.unfollow(props.data.author)}
         />
       )
     } else {
       return (
-        <Button title="Segui" onPress={() => props.follow(props.data.author)} />
+        <Button
+          color={COLORS.red}
+          title="Segui"
+          onPress={() => props.follow(props.data.author)}
+        />
       )
     }
+  }
+
+  const renderDateTime = (datetime) => {
+    let parsedDateTime = datetime.slice(0, 10) + 'T' + datetime.slice(11, 19)
+    let formattedDateTime = new Date(parsedDateTime).toLocaleString('it-IT', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
+    return <Text style={styles.dateTimeStyle}>{formattedDateTime}</Text>
   }
 
   return (
@@ -113,7 +145,7 @@ const Post = (props) => {
       </View>
       {renderDelayInfo(props.data.delay)}
       {renderStatusInfo(props.data.status)}
-      <Text style={styles.dateTimeStyle}>{props.data.datetime}</Text>
+      {renderDateTime(props.data.datetime)}
     </View>
   )
 }
@@ -149,7 +181,12 @@ const styles = StyleSheet.create({
   buttonStyle: {
     justifyContent: 'flex-end',
   },
-  dateTimeStyle: { marginTop: 4, marginBottom: 4, marginStart: 16 },
+  dateTimeStyle: {
+    marginTop: 4,
+    marginBottom: 4,
+    marginStart: 16,
+    fontStyle: 'italic',
+  },
 })
 
 export default Post

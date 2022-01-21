@@ -3,7 +3,9 @@ import { StyleSheet, Dimensions } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import * as Location from 'expo-location'
 import NetworkController from '../utils/NetworkController'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 import { SidContext } from '../utils/SidContext'
+import { COLORS } from '../colors'
 
 const Map = (props) => {
   const sid = useContext(SidContext)
@@ -42,7 +44,9 @@ const Map = (props) => {
             }}
             title={station.sname}
             key={station.sname}
-          />
+          >
+            <Ionicons name={'train'} size={32} color={COLORS.red} />
+          </Marker>
         )
       })
     }

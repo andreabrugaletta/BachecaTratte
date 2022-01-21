@@ -6,6 +6,7 @@ import {
   LogBox,
   StyleSheet,
   Image,
+  Text,
   View,
   TouchableOpacity,
   SafeAreaView,
@@ -91,11 +92,11 @@ const BoardsScreen = (props) => {
       .then(() => getPosts(getLine(index).terminus1.did))
   }
 
-  /* TODO: make it more READABLE! */
   useLayoutEffect(() => {
     props.navigation.setOptions({
       title:
         getLine(index).terminus1.sname + ' - ' + getLine(index).terminus2.sname,
+      headerTintColor: 'white',
       headerRight: () => (
         <View style={styles.headerButtons}>
           <TouchableOpacity
@@ -111,7 +112,7 @@ const BoardsScreen = (props) => {
               })
             }}
           >
-            <MaterialIcon name="swap-horiz" size={30} />
+            <MaterialIcon name="swap-horiz" size={30} color={'white'} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -119,7 +120,7 @@ const BoardsScreen = (props) => {
               setAddPostVisibility(true)
             }}
           >
-            <FeatherIcon name="plus" size={30} />
+            <FeatherIcon name="plus" size={30} color={'white'} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -127,7 +128,7 @@ const BoardsScreen = (props) => {
               setMapVisibility(true)
             }}
           >
-            <FeatherIcon name="map" size={30} />
+            <FeatherIcon name="map" size={30} color={'white'} />
           </TouchableOpacity>
         </View>
       ),
@@ -135,7 +136,6 @@ const BoardsScreen = (props) => {
   }, [])
 
   useEffect(() => {
-    // storageManager.deleteUserTable() //CHECK VALID BASE 64
     storageManager.createUserTable()
     getPosts(getLine(index).terminus1.did)
     return () => {

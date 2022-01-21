@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { RadioButton } from 'react-native-paper'
+import { COLORS } from '../colors'
 
 const DelayRadioButtons = (props) => {
   const [checked, setChecked] = useState('fifth')
@@ -11,6 +12,7 @@ const DelayRadioButtons = (props) => {
       <View style={styles.radioButton}>
         {console.log('renderDelayRadioButtons')}
         <RadioButton
+          color={COLORS.green}
           value="first"
           status={checked !== 'first' ? 'unchecked' : 'checked'}
           onPress={() => {
@@ -23,6 +25,7 @@ const DelayRadioButtons = (props) => {
       </View>
       <View style={styles.radioButton}>
         <RadioButton
+          color={COLORS.yellow}
           value="second"
           status={checked !== 'second' ? 'unchecked' : 'checked'}
           onPress={() => {
@@ -35,6 +38,7 @@ const DelayRadioButtons = (props) => {
       </View>
       <View style={styles.radioButton}>
         <RadioButton
+          color={COLORS.orange}
           value="third"
           status={checked !== 'third' ? 'unchecked' : 'checked'}
           onPress={() => {
@@ -47,6 +51,7 @@ const DelayRadioButtons = (props) => {
       </View>
       <View style={styles.radioButton}>
         <RadioButton
+          color={COLORS.red}
           value="fourth"
           status={checked !== 'fourth' ? 'unchecked' : 'checked'}
           onPress={() => {
@@ -59,6 +64,7 @@ const DelayRadioButtons = (props) => {
       </View>
       <View style={styles.radioButton}>
         <RadioButton
+          color="grey"
           value="fifth"
           status={checked !== 'fifth' ? 'unchecked' : 'checked'}
           onPress={() => {

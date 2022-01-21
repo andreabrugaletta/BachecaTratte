@@ -8,13 +8,45 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import NetworkController from './utils/NetworkController'
 import { SidContext } from './utils/SidContext'
 import Profile from './components/Profile'
+import { StyleSheet, StatusBar } from 'react-native'
+import { COLORS } from './colors.js'
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { Colors } from 'react-native/Libraries/NewAppScreen'
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
 
 function HomeTab() {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName
+
+          if (route.name === 'Linee') {
+            iconName = focused ? 'train' : 'train-outline'
+            return <Ionicons name={iconName} size={size} color={color} />
+          } else if (route.name === 'Profilo') {
+            iconName = focused ? 'user' : 'user-o'
+            return <FontAwesome name={iconName} size={size} color={color} />
+          }
+        },
+        tabBarActiveTintColor: 'white',
+        tabBarInactiveTintColor: 'white',
+        tabBarActiveBackgroundColor: COLORS.red,
+        tabBarInactiveBackgroundColor: COLORS.red,
+        headerShown: false,
+        tabBarLabelStyle: {
+          fontSize: 14,
+        },
+        tabBarStyle: {
+          backgroundColor: COLORS.red,
+          paddingVertical: 4,
+        },
+      })}
+    >
       <Tab.Screen name="Linee" component={LinesScreen} />
       <Tab.Screen name="Profilo" component={Profile} />
     </Tab.Navigator>
@@ -44,6 +76,7 @@ export default function App() {
   if (sid === '') {
     return null
   } else {
+    StatusBar.setBarStyle('light-content', true)
     return (
       <SidContext.Provider value={sid}>
         <NavigationContainer>
@@ -51,12 +84,29 @@ export default function App() {
             <Stack.Screen
               name="LinesScreen"
               component={HomeTab}
-              options={{ title: 'Maledetta TreEst' }}
+              options={{
+                title: 'Maledetta TreEst',
+                headerStyle: styles.headerStyle,
+                headerTitleStyle: styles.headerTitleStyle,
+              }}
             />
-            <Stack.Screen name="BoardsScreen" component={BoardsScreen} />
+            <Stack.Screen
+              name="BoardsScreen"
+              component={BoardsScreen}
+              options={{
+                headerStyle: { backgroundColor: COLORS.red },
+                headerTitleStyle: styles.headerTitleStyle,
+              }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </SidContext.Provider>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  headerStyle: {
+    backgroundColor: COLORS.red,
+  },
+})

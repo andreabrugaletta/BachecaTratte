@@ -16,6 +16,7 @@ import NetworkController from '../utils/NetworkController'
 import { SidContext } from '../utils/SidContext'
 import DelayRadioButtons from './DelayRadioButtons'
 import StatusRadioButtons from './StatusRadioButtons'
+import { COLORS } from '../colors'
 
 const AddModal = (props) => {
   const sid = useContext(SidContext)
@@ -51,6 +52,8 @@ const AddModal = (props) => {
       <SafeAreaView>
         <Header
           title="Crea post"
+          headerStyle={{ backgroundColor: COLORS.red }}
+          headerTintColor="white"
           headerLeft={() => (
             <TouchableOpacity
               onPress={() => {
@@ -59,11 +62,17 @@ const AddModal = (props) => {
                 setStatusRadioButtonIsChecked(false)
               }}
             >
-              <Icon name="close" style={{ marginLeft: 8 }} size={30} />
+              <Icon
+                name="close"
+                style={{ marginLeft: 8 }}
+                size={30}
+                color={'white'}
+              />
             </TouchableOpacity>
           )}
           headerRight={() => (
             <Button
+              color={'white'}
               title="Pubblica"
               disabled={
                 !delayRadioButtonIsChecked &&
@@ -116,7 +125,7 @@ const AddModal = (props) => {
   )
 }
 
-/* style repetion for image, username and comment between post and addmodal */
+/* style repetion for image, username and comment between post and addmodal? */
 const styles = StyleSheet.create({
   imageUsernameContainer: {
     flexDirection: 'row',

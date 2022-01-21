@@ -4,6 +4,7 @@ import NetworkController from '../utils/NetworkController'
 import { SidContext } from '../utils/SidContext'
 import * as ImagePicker from 'expo-image-picker'
 import { Snackbar } from 'react-native-paper'
+import { COLORS } from '../colors'
 
 const Profile = (props) => {
   const sid = useContext(SidContext)
@@ -63,16 +64,22 @@ const Profile = (props) => {
       )}
       <View style={styles.buttonsContainer}>
         <Button
+          color={COLORS.red}
           title="modifica nome"
           onPress={() => {
             setEditUsername(true)
             setShowUsername(false)
           }}
         />
-        <Button title="modifica foto" onPress={pickImageFromGalleryAsync} />
+        <Button
+          color={COLORS.red}
+          title="modifica foto"
+          onPress={pickImageFromGalleryAsync}
+        />
       </View>
       {editUsername && (
         <Button
+          color={COLORS.red}
           title="Salva"
           onPress={() => {
             setEditUsername(false)
@@ -82,7 +89,7 @@ const Profile = (props) => {
         />
       )}
       <Snackbar
-        style={{ backgroundColor: 'red' }}
+        style={{ backgroundColor: COLORS.red }}
         visible={snackbarVisible}
         onDismiss={() => setSnackbarVisible(false)}
         action={{
