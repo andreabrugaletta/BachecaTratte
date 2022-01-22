@@ -109,4 +109,7 @@ const styles = StyleSheet.create({
   headerStyle: {
     backgroundColor: COLORS.red,
   },
+  headerTitleStyle: {
+    color: 'white',
+  },
 })

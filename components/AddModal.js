@@ -75,9 +75,10 @@ const AddModal = (props) => {
               color={'white'}
               title="Pubblica"
               disabled={
-                !delayRadioButtonIsChecked &&
-                !statusRadioButtonIsChecked &&
-                comment.length == 0
+                (!delayRadioButtonIsChecked &&
+                  !statusRadioButtonIsChecked &&
+                  comment.length == 0) ||
+                comment.length > 100
               }
               onPress={() => {
                 console.log('publish post')
@@ -101,7 +102,7 @@ const AddModal = (props) => {
         <TextInput
           style={styles.comment}
           multiline={true}
-          placeholder="Scrivi qui un commento"
+          placeholder="Commento (max 100 caratteri)"
           onChangeText={(comment) => {
             if (comment.length != 0) {
               setComment(comment)

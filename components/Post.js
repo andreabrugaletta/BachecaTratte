@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     width: 44,
     marginTop: 8,
   },
-  username: { fontSize: 20, fontWeight: 'bold', marginStart: 8 },
+  username: { fontSize: 20, fontWeight: 'bold', marginStart: 8, maxWidth: 250 },
   commentContainer: { paddingHorizontal: 16, paddingVertical: 4 },
   comment: { fontSize: 16 },
   info: {

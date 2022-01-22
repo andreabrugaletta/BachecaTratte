@@ -17,7 +17,7 @@ const Line = (props) => {
       }}
     >
       <View style={styles.item}>
-        <Entypo name={'flow-line'} size={48} />
+        <Entypo name={'flow-line'} size={52} />
         <View style={styles.textContainer}>
           <Text style={styles.terminusName}>{props.terminus1.sname}</Text>
           <Text style={styles.terminusName}>{props.terminus2.sname}</Text>

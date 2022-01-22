@@ -1,7 +1,6 @@
 import React from 'react'
 import { FlatList } from 'react-native'
 import Line from './Line'
-import ItemSeparator from './ItemSeparator'
 
 const LinesList = (props) => {
   return (

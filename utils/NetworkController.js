@@ -12,7 +12,18 @@ export default class NetworkController {
         method: 'POST',
         body: JSON.stringify(parameters),
       })
+
       // CHECK response.status
+      if (response.status == 200) {
+        console.log('OK')
+      } else if (response.status == 400) {
+        console.log('INVALID PARAMETERS')
+      } else if (response.status == 401) {
+        console.log('INVALID SID')
+      } else if (response.status == 413) {
+        console.log('LARGE PARAMETERS')
+      }
+
       const jsonResponse = await response.json()
       return jsonResponse
     } catch (error) {

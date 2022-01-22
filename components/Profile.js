@@ -57,8 +57,9 @@ const Profile = (props) => {
       {showUsername && <Text style={styles.username}>{username}</Text>}
       {editUsername && (
         <TextInput
+          multiline={true}
           style={styles.username}
-          placeholder={username}
+          placeholder="username (max 20 caratteri)"
           onChangeText={setUsername}
         />
       )}
@@ -81,6 +82,7 @@ const Profile = (props) => {
         <Button
           color={COLORS.red}
           title="Salva"
+          disabled={username.length > 20}
           onPress={() => {
             setEditUsername(false)
             setShowUsername(true)
@@ -120,6 +122,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     marginTop: 16,
+    paddingHorizontal: 32,
   },
   buttonsContainer: {
     flexDirection: 'row',
