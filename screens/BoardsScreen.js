@@ -16,21 +16,29 @@ import MapModal from '../components/MapModal'
 import AddModal from '../components/AddModal'
 import FeatherIcon from 'react-native-vector-icons/Feather'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
+import OfficialPostsList from '../components/OfficialPostsList'
+import OfficialPostModal from '../components/OfficialPostModal'
+import { ScrollView } from 'react-native-gesture-handler'
 
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
 ])
 
-const BoardsScreen = (props) => {
+const BoardsScreen = (props, navigation) => {
   const index = props.route.params.index
   const getLine = props.route.params.getLine
   const swapLine = props.route.params.swapLine
   const sid = useContext(SidContext)
   const [mapVisibility, setMapVisibility] = useState(false)
   const [addPostVisibility, setAddPostVisibility] = useState(false)
+  const [officialPostVisibility, setOfficialPostVisibility] = useState(false)
   const [posts, setPosts] = useState()
+  const [officialPosts, setOfficialPosts] = useState()
   const [networkController] = useState(() => new NetworkController())
   const [storageManager] = useState(() => new StorageManager())
+  const [title, setTitle] = useState('')
+  const [timestamp, setTimestamp] = useState('')
+  const [description, setDescription] = useState('')
 
   const fetchPictureFromServerAndUpdateDbAsync = async (post) => {
     const base64prefix = 'data:image/png;base64,'
@@ -45,6 +53,27 @@ const BoardsScreen = (props) => {
       pversion: post.pversion,
     }
     storageManager.insertUserAsync(user)
+  }
+
+  const getOfficialPosts = (did) => {
+    networkController.getOfficialPosts(sid, did).then((officialPosts) => {
+      console.log(
+        'esamegennaio did: ' +
+          did +
+          ' numero di post ufficiali: ' +
+          officialPosts.length,
+      )
+
+      officialPosts.forEach((officialPost) =>
+        console.log(
+          'esamegennaio title: ' +
+            officialPost.title +
+            ' timestamp: ' +
+            officialPost.timestamp,
+        ),
+      )
+      setOfficialPosts(officialPosts)
+    })
   }
 
   const getPosts = (did) => {
@@ -77,6 +106,9 @@ const BoardsScreen = (props) => {
   const dismissMapModal = () => {
     setMapVisibility(false)
   }
+  const dismissOfficialPost = () => {
+    setOfficialPostVisibility(false)
+  }
   const dismissAddModal = () => {
     setAddPostVisibility(false)
     getPosts(getLine(index).terminus1.did)
@@ -103,6 +135,7 @@ const BoardsScreen = (props) => {
             onPress={() => {
               console.log('swap board')
               swapLine(index)
+              getOfficialPosts(getLine(index).terminus1.did)
               getPosts(getLine(index).terminus1.did)
               props.navigation.setOptions({
                 title:
@@ -137,6 +170,8 @@ const BoardsScreen = (props) => {
 
   useEffect(() => {
     storageManager.createUserTable()
+    console.log('NAVIGATION OBJECT', navigation)
+    getOfficialPosts(getLine(index).terminus1.did)
     getPosts(getLine(index).terminus1.did)
     return () => {
       setPosts({})
@@ -154,6 +189,21 @@ const BoardsScreen = (props) => {
         visible={addPostVisibility}
         dismiss={dismissAddModal}
         did={getLine(index).terminus1.did}
+      />
+      <OfficialPostModal
+        visible={officialPostVisibility}
+        title={title}
+        timestamp={timestamp}
+        description={description}
+        dismiss={dismissOfficialPost}
+      />
+      <OfficialPostsList
+        officialPosts={officialPosts}
+        setOfficialPostVisibility={setOfficialPostVisibility}
+        setTitle={setTitle}
+        setTimestamp={setTimestamp}
+        setDescription={setDescription}
+        // navigation={navigation}
       />
       <PostsList posts={posts} follow={follow} unfollow={unfollow} />
     </SafeAreaView>

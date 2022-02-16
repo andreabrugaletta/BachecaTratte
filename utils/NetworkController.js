@@ -1,8 +1,6 @@
 export default class NetworkController {
   BASE_URL = 'https://ewserver.di.unimi.it/mobicomp/treest/'
 
-  /* CHECK ERROR HANDLING */
-
   async genericRequest(endpoint, parameters) {
     const URL = this.BASE_URL + endpoint + '.php'
     console.log(parameters)
@@ -41,7 +39,6 @@ export default class NetworkController {
     return response
   }
 
-  /* not tested */
   async setProfile(sid, name, picture) {
     await this.genericRequest('setProfile', {
       sid: sid,
@@ -69,6 +66,14 @@ export default class NetworkController {
       did: did,
     })
     return response.posts
+  }
+
+  async getOfficialPosts(sid, did) {
+    const response = await this.genericRequest('statolineatreest', {
+      sid: sid,
+      did: did,
+    })
+    return response.officialposts
   }
 
   async addPost(sid, did, delay, status, comment) {

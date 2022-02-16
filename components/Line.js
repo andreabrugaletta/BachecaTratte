@@ -9,7 +9,6 @@ const Line = (props) => {
       onPress={() => {
         console.log(props.terminus1.sname)
         props.navigation.navigate('BoardsScreen', {
-          // terminus: props.terminus1,
           index: props.index,
           swapLine: props.swapLine,
           getLine: props.getLine,

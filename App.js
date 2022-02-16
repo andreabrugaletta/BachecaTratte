@@ -12,8 +12,7 @@ import { StyleSheet, StatusBar } from 'react-native'
 import { COLORS } from './colors.js'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { Colors } from 'react-native/Libraries/NewAppScreen'
+// import OfficialPostDetailScreen from './screens/OfficialPostDetailScreen'
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()

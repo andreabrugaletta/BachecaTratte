@@ -1,8 +1,8 @@
 import React from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, Text } from 'react-native'
 import Post from './Post'
 import ItemSeparator from './ItemSeparator'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import OfficialPostsLists from './OfficialPostsList'
 
 const PostsList = (props) => {
   return (
